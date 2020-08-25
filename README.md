@@ -13,7 +13,7 @@ Image contains:
 
 - Ubuntu: 18.04
 - gpg: 2.2
-- git-secret: 0.2.4
+- git-secret: 0.3.1
 
 # Usage
 
@@ -45,20 +45,3 @@ provided you have a `secret.gpg` file and `$PASSWORD` is the password for it.
 
 Alternatively you can add `git-secret-reveal-docker.sh` and `git-secret-hide-docker.sh` 
 to your repo which automates extracting your key the first time you run it. 
-
-# Examples
-
-## In Travis CI
-
-[soundoftext-api](https://github.com/ncpierson/soundoftext-api) uses the
-`ncpierson/git-secret` docker image on Travis CI to decrypt secret files in the
-repo. Check out `.travis.yml` and `scripts/travis/decrypt.sh` for details.
-
-# Contributing
-
-Built by:
-
-- [Nick Pierson](https://nick.exposed)
-- [Simon Massey](https://github.com/simbo1905)
-
-Pull requests welcome!
