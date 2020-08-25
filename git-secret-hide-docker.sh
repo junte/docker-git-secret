@@ -7,5 +7,5 @@ docker run             \
   -v "$(dirname ~/gpg/secret.gpg):/gpg"   \
   -v `pwd`:`pwd`       \
   -w `pwd`             \
-  ncpierson/git-secret \
+  junte/git-secret:0.3.1 \
   bash -c "$command"
