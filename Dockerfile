@@ -16,4 +16,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends git-secret=${GIT_SECRETS_VERSION} \
     && apt-get remove --purge -y wget \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir /.gnupg \
+    && chmod 777 /.gnupg
