@@ -4,8 +4,7 @@ on: [pull_request, push]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
-  RELEASE_IMAGE_NAME: ${{ env.IMAGE_NAME }}:0.5.0
+  IMAGE_NAME_CACHE: ghcr.io/${{ github.repository }}:_buildcache
 
 jobs:
   build-image:
@@ -27,7 +26,8 @@ jobs:
       - name: Build test Docker image
         uses: docker/build-push-action@v2
         with:
-          tags: ${{ env.RELEASE_IMAGE_NAME }}
+          tags: ghcr.io/${{ github.repository }}:0.5.0
           push: true
-          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:_buildcache
-          cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:_buildcache,mode=max
+          platforms: linux/arm64,linux/amd64
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME_CACHE }}
+          cache-to: type=registry,ref=${{ env.IMAGE_NAME_CACHE }},mode=max
