@@ -13,7 +13,7 @@ Image contains:
 
 - Ubuntu: 18.04
 - gpg: 2.2
-- git-secret: 0.3.1
+- git-secret: 0.5.0
 
 # Usage
 
@@ -35,13 +35,12 @@ EOF
 docker run             \
   -v `pwd`:`pwd`       \
   -w `pwd`             \
-  ncpierson/git-secret \
+  ghcr.io/junte/docker-git-secret/git-secret \
   bash -c "$command"
 ```
-
 
 For instance, this would reveal secrets in your current working directory,
 provided you have a `secret.gpg` file and `$PASSWORD` is the password for it.
 
-Alternatively you can add `git-secret-reveal-docker.sh` and `git-secret-hide-docker.sh` 
-to your repo which automates extracting your key the first time you run it. 
+Alternatively you can add `git-secret-reveal-docker.sh` and `git-secret-hide-docker.sh`
+to your repo which automates extracting your key the first time you run it.
