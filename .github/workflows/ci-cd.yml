@@ -28,6 +28,6 @@ jobs:
         with:
           tags: ghcr.io/${{ github.repository }}:0.5.0
           push: true
-          platforms: linux/arm64,linux/amd64
+          # platforms: linux/arm64,linux/amd64
           cache-from: type=registry,ref=${{ env.IMAGE_NAME_CACHE }}
           cache-to: type=registry,ref=${{ env.IMAGE_NAME_CACHE }},mode=max
