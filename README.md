@@ -7,7 +7,7 @@ I needed this primarily because I wanted to use `git secret` on a Travis CI
 build, but I could not install the gpg version I needed (2.2+) to maintain
 consistency with my personal development environments.
 
-# Info
+## Info
 
 Image contains:
 
@@ -15,32 +15,29 @@ Image contains:
 - gpg: 2.2
 - git-secret: 0.5.0
 
-# Usage
+## Usage
 
-To pull this container:
-
-```
-docker pull ncpierson/git-secret
-```
-
-To use a git secret command:
+### Reveal
 
 ```bash
-command=`cat <<EOF
-gpg --batch --import secret.gpg && \
-  git secret reveal -p $PASSWORD
-EOF
-`
-
-docker run             \
-  -v `pwd`:`pwd`       \
-  -w `pwd`             \
-  ghcr.io/junte/docker-git-secret/git-secret \
-  bash -c "$command"
+docker run \
+ -it \
+ --rm \
+ -v "$(pwd)/gpg:/gpg" \
+ -v "$(pwd):$(pwd)" \
+ -w "$(pwd)" \
+ ghcr.io/junte/docker-git-secret:0.5.0 \
+ bash -c "gpg --batch --import /gpg/secret.gpg && git secret reveal -v -P -f" 
 ```
 
-For instance, this would reveal secrets in your current working directory,
-provided you have a `secret.gpg` file and `$PASSWORD` is the password for it.
+### Hide
 
-Alternatively you can add `git-secret-reveal-docker.sh` and `git-secret-hide-docker.sh`
-to your repo which automates extracting your key the first time you run it.
+```bash
+docker run \
+ --rm \
+ -v "$(pwd)/gpg:/gpg" \
+ -v "$(pwd):$(pwd)" \
+ -w "$(pwd)" \
+ ghcr.io/junte/docker-git-secret:0.5.0 \
+ bash -c "gpg --batch --import /gpg/secret.gpg && gpg --list-key && git secret hide -P -m" 
+```
